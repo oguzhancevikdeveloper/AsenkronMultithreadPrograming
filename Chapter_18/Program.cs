@@ -31,10 +31,12 @@
 
 #region Custom
 
-// await foreach ifadesi, üzerinde çalışacağı nesnenin IAsyncEnumerable<T> arayüzünü uyguladığını varsayar. Bu arayüz, GetAsyncEnumerator metodunu içerir ve bu metod bir IAsyncEnumerator<T> döner.
+// await foreach ifadesi, üzerinde çalışacağı nesnenin IAsyncEnumerable<T> arayüzünü uyguladığını varsayar.
+// Bu arayüz, GetAsyncEnumerator metodunu içerir ve bu metod bir IAsyncEnumerator<T> döner.
 NumberList numberlist = new NumberList();
 
-
+await foreach (var number in numberlist)
+    Console.WriteLine(number);
 
 await using (var enumarator = numberlist.GetAsyncEnumerator())
 {
@@ -45,11 +47,6 @@ await using (var enumarator = numberlist.GetAsyncEnumerator())
     }
 }
 
-
-var t = numberlist.GetAsyncEnum();
-
-await foreach (var number in numberlist)
-    Console.WriteLine(number);
 
 class NumberList : IAsyncEnumerable<int>
 {
